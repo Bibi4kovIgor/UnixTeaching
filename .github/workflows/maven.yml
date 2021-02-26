@@ -32,5 +32,4 @@ jobs:
         # The local folder to copy, defaults to root project folder
         #local-dir: # optional
         # Passes through options into git-ftp
-        #git-ftp-args: # optional
-        
+        #git-ftp-args: # optional     
