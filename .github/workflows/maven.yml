@@ -24,6 +24,5 @@ jobs:
          java-version: 15
     #- name: Build with Maven
       #run: mvn -B package --file pom.xml
-     - run: echo ${{ env.MY_Constant }}  
-     - run: echo ${{ secrets.MY_CUSTOM_CONSTANT }}
+     - run: echo ${{ env.MY_Constant }}  | echo ${{ secrets.MY_CUSTOM_CONSTANT }}
     
