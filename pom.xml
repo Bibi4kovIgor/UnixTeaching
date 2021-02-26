@@ -40,6 +40,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuratiion>
+					<source>15</source>
+					<target>15</target>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
