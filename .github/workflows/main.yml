@@ -37,12 +37,9 @@ jobs:
         restore-keys: ${{ runner.os }}-m2      
 
     - name: Build and test project with Maven
-      run: mvn package
+      run: mvn clean install | mvn compile | mvn package
 
     #Deploy on FTP
-    - name: FTP Deploy
-      uses: SamKirkland/FTP-Deploy-Action@3.0.0
-
     - name: FTP Deploy
       uses: SamKirkland/FTP-Deploy-Action@3.0.0
       with:
