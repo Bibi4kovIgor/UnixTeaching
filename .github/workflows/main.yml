@@ -35,7 +35,7 @@ jobs:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2      
-
+        
     - name: Build and test project with Maven
       run: mvn clean install | mvn compile | mvn package
       
@@ -57,9 +57,4 @@ jobs:
         # FTP account username
         ftp-username: ${{ secrets.FTP_USERNAME }}
         # FTP account password
-        ftp-password: ${{ secrets.FTP_PASSWORD }}
-        
-
-      
-    #Deploy on FTP
-    
+        ftp-password: ${{ secrets.FTP_PASSWORD }}   
