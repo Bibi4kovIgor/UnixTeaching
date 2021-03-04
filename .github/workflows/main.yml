@@ -29,12 +29,12 @@ jobs:
       with:
         java-version: 15.0.2
 
-   # - name: Cache the Maven packages to speed up build
-   #   uses: actions/cache@v1
-   #   with:
-   #     path: ~/.m2
-   #     key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-   #     restore-keys: ${{ runner.os }}-m2      
+    - name: Cache the Maven packages to speed up build
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2      
         
    # - name: Build and test project with Maven
    # - run: mvn clean install | mvn compile | mvn -B package --file pom.xml -DskipTests
