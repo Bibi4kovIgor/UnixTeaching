@@ -29,30 +29,30 @@ jobs:
       with:
         java-version: 15.0.2
 
-    - name: Cache the Maven packages to speed up build
-      uses: actions/cache@v1
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2      
+   # - name: Cache the Maven packages to speed up build
+   #   uses: actions/cache@v1
+   #   with:
+   #     path: ~/.m2
+   #     key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+   #     restore-keys: ${{ runner.os }}-m2      
         
-    - name: Build and test project with Maven
-    - run: mvn clean install | mvn compile | mvn -B package --file pom.xml -DskipTests
+   # - name: Build and test project with Maven
+   # - run: mvn clean install | mvn compile | mvn -B package --file pom.xml -DskipTests
       
-    - name: War Build  
-    - run: mvn --batch-mode --update-snapshots verify
-    - run: mkdir staging && cp target/*.jar staging
-    - uses: actions/upload-artifact@v2
-      with:
-        name: Package
-        path: staging  
+   # - name: War Build  
+   # - run: mvn --batch-mode --update-snapshots verify
+   # - run: mkdir staging && cp target/*.jar staging
+   # - uses: actions/upload-artifact@v2
+   #   with:
+   #    name: Package
+   #     path: staging  
       
-    - name: FTP Deploy
-      uses: SamKirkland/FTP-Deploy-Action@3.0.0
-      with:
+   # - name: FTP Deploy
+   #   uses: SamKirkland/FTP-Deploy-Action@3.0.0
+   #   with:
         # Deployment destination server & path. Formatted as protocol://domain.com:port/full/destination/path/
-        ftp-server: ${{ secrets.FTP_HOST }}
+   #     ftp-server: ${{ secrets.FTP_HOST }}
         # FTP account username
-        ftp-username: ${{ secrets.FTP_USERNAME }}
+   #     ftp-username: ${{ secrets.FTP_USERNAME }}
         # FTP account password
-        ftp-password: ${{ secrets.FTP_PASSWORD }}   
+    #    ftp-password: ${{ secrets.FTP_PASSWORD }}   
