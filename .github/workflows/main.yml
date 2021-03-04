@@ -43,19 +43,19 @@ jobs:
    #   run: mvn --batch-mode --update-snapshots verify
     - name : Get current directories
       run: ls
-    - name: Create staging Dir by target
+    - name: Create staging Dir place the *.war file inside it (from target dir)
       run: mkdir staging && cp target/*.war staging
    # - uses: actions/upload-artifact@v2
    #   with:
    #    name: Package
    #     path: staging  
       
-   # - name: FTP Deploy
-   #   uses: SamKirkland/FTP-Deploy-Action@3.0.0
-   #   with:
+    - name: FTP Deploy
+      uses: SamKirkland/FTP-Deploy-Action@3.0.0
+      with:
         # Deployment destination server & path. Formatted as protocol://domain.com:port/full/destination/path/
-   #     ftp-server: ${{ secrets.FTP_HOST }}
+        ftp-server: ${{ secrets.FTP_HOST }}
         # FTP account username
-   #     ftp-username: ${{ secrets.FTP_USERNAME }}
+        ftp-username: ${{ secrets.FTP_USERNAME }}
         # FTP account password
-    #    ftp-password: ${{ secrets.FTP_PASSWORD }}   
+        ftp-password: ${{ secrets.FTP_PASSWORD }}   
