@@ -49,8 +49,7 @@ jobs:
         git config --global user.name ${{ secrets.MY_GITHUB_USERNAME }}
         git config --global user.email ${{ secrets.MY_GITHUB_EMAIL }}
 
-        git add **\<pathspec\>** git commit -m "commit message"
-        git push
+        git add -A && git commit -m "Adding staging directory" && git push
 
     - name: upload artifact staging dir with war via ftp
       uses: actions/upload-artifact@v2
