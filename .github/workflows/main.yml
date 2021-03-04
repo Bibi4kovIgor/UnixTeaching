@@ -41,6 +41,8 @@ jobs:
       
    # - name: War Build  
    #   run: mvn --batch-mode --update-snapshots verify
+    - name : Get current directories
+      run: ls
     - name: Create staging Dir by target
       run: mkdir staging && cp target/*.jar staging
    # - uses: actions/upload-artifact@v2
