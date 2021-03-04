@@ -37,7 +37,7 @@ jobs:
         restore-keys: ${{ runner.os }}-m2      
         
     - name: Build and test project with Maven
-      run: mvn clean install | mvn compile | mvn -B package --file pom.xml -DskipTests -x
+      run: mvn clean install | mvn compile | mvn -B package --file pom.xml -DskipTests -X
       
    # - name: War Build  
    #   run: mvn --batch-mode --update-snapshots verify
