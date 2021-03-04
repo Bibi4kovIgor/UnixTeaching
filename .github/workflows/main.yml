@@ -46,7 +46,7 @@ jobs:
     - name: Create staging Dir place the *.war file inside it (from target dir)
       run: mkdir staging && cp target/*.war staging
     - name : Get current directories after adding staging
-      run: ls
+      run: ls && cd staging && ls
     - name: upload artifact staging dir with war via ftp
       uses: actions/upload-artifact@v2
       with:
