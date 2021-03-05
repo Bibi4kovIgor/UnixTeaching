@@ -25,7 +25,7 @@ public class MainController {
 
         @GetMapping("/")
         public String index() {
-            return "Hello, Guys!";
+            return "Hello, super guys!";
         }
 
     }
