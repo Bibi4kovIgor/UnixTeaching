@@ -76,8 +76,8 @@ jobs:
      
     steps:  
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - name: Set up JDK 15
-      uses: actions/checkout@v2        
+    # - name: Check out dir
+    #  uses: actions/checkout@v2        
       
     - name: Undeploy war file
       run: |
@@ -90,7 +90,7 @@ jobs:
     - name: Deploy on Tomcat server war file
       run:  |
         curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }} \
-        "${{ env.TOMCAT_ADDRESS }}/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:/staging/${{ env.WAR_FILE_NAME }}"    
+        "${{ env.TOMCAT_ADDRESS }}/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:${{ github.workspace }}/staging/${{ env.WAR_FILE_NAME }}"    
         
         
         
