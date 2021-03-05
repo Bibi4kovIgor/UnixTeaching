@@ -81,9 +81,7 @@ jobs:
         "${{ env.TOMCAT_ADDRESS }}/manager/text/undeploy?path=/${{ env.WAR_PATH_NAME }}"    
    
     - name: Undeploy war file
-      run: |
-        curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }}\
-        "${{ env.TOMCAT_ADDRESS }}/manager/text/undeploy?path=/${{ env.WAR_PATH_NAME }}"    
+      run: curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }}"${{ env.TOMCAT_ADDRESS }}/manager/text/undeploy?path=/${{ env.WAR_PATH_NAME }}"    
         
     - name: print deploy request 
       run: |
@@ -92,6 +90,4 @@ jobs:
 
     
     - name: Deploy on Tomcat server war file
-      run: |
-        curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }}\
-        "${{ env.TOMCAT_ADDRESS }}/manager/text/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:/staging/${{ env.WAR_FILE_NAME }}"    
+      run:  curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }}"${{ env.TOMCAT_ADDRESS }}/manager/text/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:/staging/${{ env.WAR_FILE_NAME }}"    
