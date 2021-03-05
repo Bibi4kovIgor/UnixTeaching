@@ -46,7 +46,7 @@ jobs:
    # - name: War Build  
    #   run: mvn --batch-mode --update-snapshots verify
     - name: Create staging Dir place the *.war file inside it (from target dir)
-      run: mkdir staging && cp target/*.war staging
+      run: mkdir -p staging && cp target/*.war staging
 
     - name: Commit new files to repository
       run: |
