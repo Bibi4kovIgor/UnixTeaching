@@ -5,7 +5,7 @@ name: CI/CD to FTP
 env:
   WAR_FILE_NAME   : "demo-0.0.1-SNAPSHOT.war"
   WAR_PATH_NAME   : "sample" 
-  TOMCAT_ADDRESS  : "http://134.249.137.154:8082/"
+  TOMCAT_ADDRESS  : "http://134.249.137.154:8082"
 
 # Controls when the action will run. 
 on:
@@ -42,9 +42,7 @@ jobs:
         
     - name: Build and test project with Maven
       run: mvn clean install | mvn compile | mvn -B package --file pom.xml -DskipTests -X
-      
-   # - name: War Build  
-   #   run: mvn --batch-mode --update-snapshots verify
+
     - name: Create staging Dir place the *.war file inside it (from target dir)
       run: mkdir -p staging && cp target/*.war staging
 
@@ -80,20 +78,20 @@ jobs:
     - name: print undeploy request 
       run: |
         echo ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }}\
-        "${{ env.TOMCAT_ADDRESS }}manager/text/undeploy?path=/${{ env.WAR_PATH_NAME }}"    
+        "${{ env.TOMCAT_ADDRESS }}/manager/text/undeploy?path=/${{ env.WAR_PATH_NAME }}"    
    
     - name: Undeploy war file
       run: |
         curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }}\
-        "${{ env.TOMCAT_ADDRESS }}manager/text/undeploy?path=/${{ env.WAR_PATH_NAME }}"    
+        "${{ env.TOMCAT_ADDRESS }}/manager/text/undeploy?path=/${{ env.WAR_PATH_NAME }}"    
         
     - name: print deploy request 
       run: |
         echo ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }}\
-        "${{ env.TOMCAT_ADDRESS }}manager/text/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:/staging/${{ env.WAR_FILE_NAME }}"    
+        "${{ env.TOMCAT_ADDRESS }}/manager/text/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:/staging/${{ env.WAR_FILE_NAME }}"    
 
     
     - name: Deploy on Tomcat server war file
       run: |
         curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }}\
-        "${{ env.TOMCAT_ADDRESS }}manager/text/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:/staging/${{ env.WAR_FILE_NAME }}"    
+        "${{ env.TOMCAT_ADDRESS }}/manager/text/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:/staging/${{ env.WAR_FILE_NAME }}"    
