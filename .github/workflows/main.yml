@@ -77,8 +77,18 @@ jobs:
     steps:  
    
     - name: Undeploy war file
-      run: curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }} "${{ env.TOMCAT_ADDRESS }}/undeploy?path=/${{ env.WAR_PATH_NAME }}"            
+      run: |
+        curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }} \
+        "${{ env.TOMCAT_ADDRESS }}/undeploy?path=/${{ env.WAR_PATH_NAME }}"            
+    
+    - name: Current Dir
+      run: ls
     
     - name: Deploy on Tomcat server war file
-      run:  curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }} "${{ env.TOMCAT_ADDRESS }}/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:/staging/${{ env.WAR_FILE_NAME }}"    
+      run:  |
+        curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }} \
+        "${{ env.TOMCAT_ADDRESS }}/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:/staging/${{ env.WAR_FILE_NAME }}"    
+        
+        
+        
 
