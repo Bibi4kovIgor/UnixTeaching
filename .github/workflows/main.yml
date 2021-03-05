@@ -85,7 +85,7 @@ jobs:
         "${{ env.TOMCAT_ADDRESS }}/undeploy?path=/${{ env.WAR_PATH_NAME }}"            
     
     - name: Current Dir
-      run: cd ${{ github.workspace }}/repo && ls     
+      run: cd ${{ github.workspace }} && ls     
     
     - name: Deploy on Tomcat server war file
       run:  |
