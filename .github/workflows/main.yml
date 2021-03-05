@@ -94,9 +94,10 @@ jobs:
        path: staging   
     
     - name: Deploy on Tomcat server war file
+      working-directory: ${{ github.workspace }}/staging
       run:  |
         curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }} \
-        "${{ env.TOMCAT_ADDRESS }}/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:${{ github.workspace }}/staging/${{ env.WAR_FILE_NAME }}"    
+        "${{ env.TOMCAT_ADDRESS }}/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:${{ env.WAR_FILE_NAME }}"    
         
         
         
