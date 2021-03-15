@@ -43,8 +43,8 @@ jobs:
     - name: Build and test project with Maven
       run: mvn clean install | mvn compile | mvn -B package --file pom.xml -DskipTests
 
-    - name: Create staging Dir place the *.war file inside it (from target dir)
-      run: mkdir -p staging && cp target/*.war staging
+ #   - name: Create staging Dir place the *.war file inside it (from target dir)
+ #     run: mkdir -p staging && cp target/*.war staging
 
  #   - name: Commit new files to repository
  #     run: |
