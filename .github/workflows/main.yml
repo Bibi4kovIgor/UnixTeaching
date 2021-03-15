@@ -16,9 +16,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-          heroku_email: ${{ env.MY_EMAIL }}
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Set up JDK 15
+      uses: actions/checkout@v2
+    - uses: actions/setup-java@v1
+      with:
+        java-version: 15.0.2
+        
+    - uses: actions/checkout@v2
+    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+        heroku_email: ${{ env.MY_EMAIL }}
