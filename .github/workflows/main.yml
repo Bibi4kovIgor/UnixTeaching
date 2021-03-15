@@ -60,7 +60,7 @@ jobs:
        path: staging         
     
       
-    - name: FTP Deploy
+    - name: FTP Upload
       uses: SamKirkland/FTP-Deploy-Action@3.0.0
       with:
         # Deployment destination server & path. Formatted as protocol://domain.com:port/full/destination/path/
@@ -98,6 +98,14 @@ jobs:
       run:  |
         curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }} \
         "${{ env.TOMCAT_ADDRESS }}/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:${{ env.WAR_FILE_NAME }}"    
+        
+    # heroku CD
+    - name: Add remote Heroku origin
+      run: |
+        git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+    - name: Deploy to Heroku
+      run: |
+        git push heroku HEAD:master -f
         
         
       
