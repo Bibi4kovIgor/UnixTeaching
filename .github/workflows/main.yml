@@ -60,15 +60,15 @@ jobs:
        path: staging         
     
       
-    - name: FTP Upload
-      uses: SamKirkland/FTP-Deploy-Action@3.0.0
-      with:
-        # Deployment destination server & path. Formatted as protocol://domain.com:port/full/destination/path/
-        ftp-server: ${{ secrets.FTP_HOST }}
-        # FTP account username
-        ftp-username: ${{ secrets.FTP_USERNAME }}
-        # FTP account password
-        ftp-password: ${{ secrets.FTP_PASSWORD }}
+#    - name: FTP Upload
+#      uses: SamKirkland/FTP-Deploy-Action@3.0.0
+#      with:
+#        # Deployment destination server & path. Formatted as protocol://domain.com:port/full/destination/path/
+#        ftp-server: ${{ secrets.FTP_HOST }}
+#        # FTP account username
+#        ftp-username: ${{ secrets.FTP_USERNAME }}
+#        # FTP account password
+#        ftp-password: ${{ secrets.FTP_PASSWORD }}
   
   cd_part:
     runs-on: ubuntu-latest
@@ -79,25 +79,25 @@ jobs:
     - name: Check out dir
       uses: actions/checkout@v2        
       
-    - name: Undeploy war file
-      run: |
-        curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }} \
-        "${{ env.TOMCAT_ADDRESS }}/undeploy?path=/${{ env.WAR_PATH_NAME }}"            
+ #   - name: Undeploy war file
+ #     run: |
+ #       curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }} \
+ #       "${{ env.TOMCAT_ADDRESS }}/undeploy?path=/${{ env.WAR_PATH_NAME }}"            
     
-    - name: Current Dir
-      run: cd ${{ github.workspace }}/staging && ls -al     
+ #   - name: Current Dir
+ #     run: cd ${{ github.workspace }}/staging && ls -al     
             
-    - name: upload artifact staging dir with war
-      uses: actions/upload-artifact@v2
-      with:
-       name: Package
-       path: staging   
+ #   - name: upload artifact staging dir with war
+ #     uses: actions/upload-artifact@v2
+ #     with:
+ #      name: Package
+ #      path: staging   
     
-    - name: Deploy on Tomcat server war file
-      working-directory: ${{ github.workspace }}/staging
-      run:  |
-        curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }} \
-        "${{ env.TOMCAT_ADDRESS }}/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:${{ env.WAR_FILE_NAME }}"    
+ #   - name: Deploy on Tomcat server war file
+ #     working-directory: ${{ github.workspace }}/staging
+ #     run:  |
+ #       curl -u ${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }} \
+ #       "${{ env.TOMCAT_ADDRESS }}/deploy?path=/${{ env.WAR_PATH_NAME }}&war=file:${{ env.WAR_FILE_NAME }}"    
         
     # heroku CD
     - name: Add remote Heroku origin
